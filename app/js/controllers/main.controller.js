@@ -55,12 +55,9 @@
                 $scope.disableButton=true;
                 $scope.barProgress=0;
 
-                //const password = '** you password **';
-
-
                 var inputFile = "if="+$scope.usb.selectedFile;
                 var outputFile = "of="+$scope.usb.selectedStorage;
-                const dd = spawn('sudo', ['-S','-p','password','dd',inputFile, outputFile, 'status=progress' ]);
+                const dd = spawn('sudo', ['-S','-p','enterpwd','dd',inputFile, outputFile, 'status=progress' ]);
                 
                 /**
                  * Disk Usage by the selected file in bytes
@@ -81,8 +78,28 @@
                 console.log($scope.usb.selectedStorage);
 
                 dd.stderr.on('data', (data) => {
-                    if('password'==data.toString()){
+
+                    data = data.toString();
+                    console.log("Data: "+ data);
+
+                    if(data.indexOf("3 incorrect password attempts")>-1){
+
+                        console.log("3 wrong attempts!");
+
+                            $mdDialog.show(
+                                $mdDialog.alert()
+                                    .parent(angular.element(document.querySelector('#popupContainer')))
+                                    .clickOutsideToClose(true)
+                                    .title('Wrong Password')
+                                    .textContent('3 incorrect password attempts!!!')
+                                    .ariaLabel('3 incorrect password attempts')
+                                    .ok('Okay')
+                            );
+
+                    }else if(data.indexOf('enterpwd')>-1){
+
                         console.log(true);
+
                         $mdDialog.show({
                             controller: 'DialogController',
                             templateUrl: 'view/passwordPrompt.html',
@@ -95,9 +112,10 @@
                         }, function() {
                             $scope.status = 'You cancelled the dialog.';
                         });
+
                     }else{
                         //console.log(`stderr: ${data}`);
-                        data = data.toString();
+    
                         if(data.indexOf("bytes")){
                             var fields = data.split(" ");
                             /*
