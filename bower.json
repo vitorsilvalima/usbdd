@@ -1,0 +1,30 @@
+{
+  "name": "usbdd",
+  "description": "Create bootable usb sticks",
+  "main": "app/main.js",
+  "authors": [
+    "Vitor Silva Lima <vitor.lima2@fatec.sp.gov.br>"
+  ],
+  "license": "MIT",
+  "homepage": "app/index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.5.9",
+    "angular-electron": "^0.2.1",
+    "angular-animate": "~1.5.9",
+    "angular-aria": "~1.5.9",
+    "angular-messages": "~1.5.9",
+    "angular-toastr": "~1.7.0",
+    "angular-ui-router": "~0.3.2",
+    "angular-material": "^1.1.0"
+  },
+  "resolutions": {
+    "angular": "~1.5.9"
+  }
+}

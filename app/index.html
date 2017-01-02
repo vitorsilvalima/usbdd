@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html ng-app="usbddApp">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Angular Material style sheet -->
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    </head>
+    <body ng-controller="mainCtrl as ctrl" ng-cloak>
+        {{cmd}}
+
+
+<div class="md-padding" layout="column">
+
+  <md-card>
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Settings</span>
+      </md-card-title-text>
+    </md-card-title>
+
+    <md-card-content>
+
+        <form ng-cloak name="usbForm">
+            <div layout="row">
+                <md-input-container flex="80">
+                    <label>.ISO FILE</label>
+                    <md-icon md-svg-src="img/icons/iso.svg"></md-icon>
+                    <input required ng-disabled="true" name="selectedFile" ng-model="usb.selectedFile" ng-click="openFile()" >
+                    <div ng-messages="usbForm.selectedFile.$error" multiple md-auto-hide="false">
+                        <div ng-message="required">
+                            Choose the iso file!
+                        </div>
+                    </div>
+                </md-input-container>
+                <md-input-container >
+                    <md-button class="md-raised md-primary"ng-click="openFile()">Find File</md-button>
+                </md-input-container>
+            </div>
+
+            <div layout="row">
+                <md-input-container>
+                    <label>USB STICK</label>
+                    <md-icon md-svg-src="img/icons/usb.svg"></md-icon>
+                    <md-select  name="selectedStorage" ng-model="usb.selectedStorage" md-on-open="loadDisks()" required>
+                        <md-option ng-repeat="device in devices" ng-value="device.name">
+                        {{device.name}} - {{device.size | gigas}} GB
+                        </md-option>
+                    </md-select>
+                    <div ng-messages="usbForm.selectedStorage.$error" multiple md-auto-hide="false">
+                        <div ng-message="required">
+                            Choose the storage device!
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container >
+                    <md-button class="md-raised md-primary" ng-disabled="disableButton" ng-click="createBootable()">Create</md-button>
+                </md-input-container>
+            </div>
+        </form>
+        <md-progress-linear md-mode="determinate" value="{{barProgress}}"></md-progress-linear>
+    </md-card-content>
+    {{ctrl.determinateValue}}
+  </md-card>
+
+  
+</div>
+
+
+        
+        <script src="../bower_components/angular/angular.min.js"> </script>
+        <script src="../bower_components/angular-electron/angular-electron.min.js"> </script>
+
+        <script src="../bower_components/angular-animate/angular-animate.min.js"></script>
+        <script src="../bower_components/angular-aria/angular-aria.min.js"></script>
+        <script src="../bower_components/angular-messages/angular-messages.min.js"></script>
+
+        <!-- Angular Material Library -->
+        <script src="../bower_components/angular-material/angular-material.min.js"></script>
+  
+
+
+        <script src="js/app.js"> </script>
+        <script src="js/app.util.js"> </script>
+
+    </body>
+</html>
