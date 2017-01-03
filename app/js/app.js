@@ -4,7 +4,6 @@ var app = angular.module('usbddApp',
 'usbddApp.controllers',
 'angular-electron']);
 
-
 app.config(function(remoteProvider){
 
     /* register required modules */

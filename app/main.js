@@ -49,7 +49,7 @@ app.on('ready', function() {
 
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 
-  if(options.debug || true ) { mainWindow.openDevTools(); }
+  //if(options.debug || true ) { mainWindow.openDevTools(); }
 
   mainWindow.on('closed', function() { mainWindow = null; });
   mainWindow.maximize();

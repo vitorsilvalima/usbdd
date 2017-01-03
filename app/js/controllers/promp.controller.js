@@ -7,7 +7,9 @@
 
     var app = angular.module('usbddApp.controllers');
 
-    app.controller('DialogController',function($scope, $mdDialog) {
+    app.controller('DialogController',
+    
+    function($scope, $mdDialog) {
 
         $scope.answer = function(answer) {
             if($scope.password!=undefined && $scope.password!=""){
@@ -19,4 +21,5 @@
         
     });
    
+
 })();
