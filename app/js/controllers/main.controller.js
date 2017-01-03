@@ -10,6 +10,7 @@
     app.controller("mainCtrl", function($scope, exec, $filter,dialog,spawn,$interval,app,remote,Tray, $mdDialog){
 
         var mainWindow = remote.getCurrentWindow();
+        
         //mainWindow.setProgressBar(0.9,{mode:"normal"});
 
         const appIcon = new Tray('/home/vlima/Documents/development/electron/usbdd/app/img/usb.png');
@@ -50,6 +51,7 @@
         };
 
         $scope.createBootable = function(){
+            mainWindow.maximize();
             //mainWindow.setIcon(appIcon);
             if($scope.usbForm.$valid){
                 $scope.disableButton=true;
